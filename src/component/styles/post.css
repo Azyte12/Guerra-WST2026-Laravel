@@ -3,8 +3,21 @@
     margin: 40px auto;    
     padding: 0 16px;
 }
+
+.post-form-container {
+    background-color: #ffffff;
+    border: 1px solid #dcdfe4;
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.post-header h2 {
+    margin: 0 0 1rem;
+    color: #1a1f26;
+}
  
-.post-form {
+.post-form,
+.post-body {
     display: flex;
     flex-direction: column;
     max-width: 48rem;
@@ -12,6 +25,7 @@
     gap: 1rem;
 }
  
+.post-input,
 .post-textarea {
     display: block;
     width: 100%;
@@ -50,6 +64,19 @@
     color: #dc2626;
     font-size: 0.875rem;
     margin-top: -0.5rem;
+}
+
+.post-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+
+.post-loading-state,
+.post-empty-state {
+    color: #6b7280;
+    margin-top: 1rem;
+    text-align: center;
 }
  
  

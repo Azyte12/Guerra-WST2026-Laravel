@@ -8,15 +8,20 @@ export default function Post() {
   const [posts, setPosts] = useState([]);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
   const [processing, setProcessing] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
         const response = await getPost();
-        setPosts(response.data.data || response.data);
+        const data = response.data.data || response.data;
+        setPosts(Array.isArray(data) ? data : []);
       } catch (err) {
         console.error("Failed to load posts", err);
+        setError('Failed to load posts. Please try again.');
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -45,6 +50,10 @@ export default function Post() {
 
       const newPost = response.data.data || response.data;
 
+      if (!newPost || typeof newPost !== 'object') {
+        throw new Error('The server returned an invalid post.');
+      }
+
       setPosts((prevPosts) => [newPost, ...prevPosts]);
       setMessage('');
 
@@ -53,6 +62,7 @@ export default function Post() {
 
       setError(
         err.response?.data?.message ||
+        err.message ||
         'Failed to create post. Please try again.'
       );
     } finally {
@@ -98,10 +108,12 @@ export default function Post() {
       </div>
 
       <div className="post-feed-list">
-        {posts.length > 0 ? (
+        {loading ? (
+          <div className="post-loading-state">Loading posts...</div>
+        ) : posts.length > 0 ? (
           posts.map((post) => (
             <PostCard
-              key={post.id || Math.random()}
+              key={post.id ?? post.uuid ?? post.created_at}
               post={post}
             />
           ))
