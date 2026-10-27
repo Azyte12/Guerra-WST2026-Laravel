@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { getPost, storePost } from '../../api/post';
+import { getPosts, storePost } from '../api/post';
 import './styles/post.css';
 import PostCard from './PostCard';
 
@@ -14,7 +14,7 @@ export default function Post() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await getPost();
+        const response = await getPosts();
         const data = response.data.data || response.data;
         setPosts(Array.isArray(data) ? data : []);
       } catch (err) {

@@ -4,7 +4,7 @@ import Card from './component/Card';
 import Form from './component/Form';
 import Counter from './component/Counter';
 import List from './component/List';
-import PostCard from './component/PostCard';
+import Post from './component/Post';
 function App() {
   return (
     <>
@@ -26,7 +26,7 @@ function App() {
 
       <List/>
 
-      <PostCard/>
+      <Post/>
     </>
   );
 }
