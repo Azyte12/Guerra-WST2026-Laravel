@@ -4,6 +4,7 @@ import Card from './component/Card';
 import Form from './component/Form';
 import Counter from './component/Counter';
 import List from './component/List';
+import PostCard from './component/PostCard';
 function App() {
   return (
     <>
@@ -24,6 +25,8 @@ function App() {
       <Form/>
 
       <List/>
+
+      <PostCard/>
     </>
   );
 }
